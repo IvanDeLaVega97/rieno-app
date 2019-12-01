@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
+import { Picture,  FullsizePicture} from 'react-responsive-picture';
+
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Paper from '@material-ui/core/Paper/Paper'
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
@@ -53,12 +55,22 @@ const theme = createMuiTheme({
   const useStyles = makeStyles(theme => ({
     root: {
       flexGrow: 1,
-      backgroundColor: theme.palette.background.paper,
+      backgroundColor: '#000000',
     },
   }));
+
+  const EstiloTextoTabs = makeStyles(theme => ({
+    root: {
+      flexGrow: 1,
+      color: '#C30368',
+      indicator: {
+        backgroundColor: 'orange'
+      }
+  }}));
   
   export default function SimpleTabs() {
     const classes = useStyles();
+    const classes2 = EstiloTextoTabs();
     const [value, setValue] = React.useState(0);
   
     const handleChange = (event, newValue) => {
@@ -66,23 +78,34 @@ const theme = createMuiTheme({
     };
   
     return (
-      <div className={classes.root}>
+      <div>
           <MuiThemeProvider theme={theme}>
-        <AppBar position="static">
-          <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-            <Tab label="Item One" {...a11yProps(0)} />
-            <Tab label="Item Two" {...a11yProps(1)} />
-            <Tab label="Item Three" {...a11yProps(2)} />
+        <Paper className={classes.root}>
+          <Tabs indicatorColor={'#C30368'} value={value} onChange={handleChange} aria-label="simple tabs example" centered className={classes.root} >
+            <Tab label="Inicio" {...a11yProps(0)} />
+            <Tab label="Blog" {...a11yProps(1)} />
+            <Tab label="Quienes Somos" {...a11yProps(2)} textColor="secundary"/>
+            <Tab label="Cursos" {...a11yProps(3)} />
+            <Tab label="Contacto" {...a11yProps(4)} />
           </Tabs>
-        </AppBar>
+        </Paper>
         </MuiThemeProvider>
         <TabPanel value={value} index={0}>
-          Item One
+          <div style={{ height: 400}}>
+          <FullsizePicture center={true} src="https://firebasestorage.googleapis.com/v0/b/rieno-c0fd1.appspot.com/o/Img%20Principal.png?alt=media&token=158038ef-e461-4da3-8218-c64c5671d79e">
+          </FullsizePicture>
+          </div>
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
         </TabPanel>
         <TabPanel value={value} index={2}>
+          Item Three
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+          Item Three
+        </TabPanel>
+        <TabPanel value={value} index={4}>
           Item Three
         </TabPanel>
       </div>
