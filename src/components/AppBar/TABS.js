@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Picture,  FullsizePicture} from 'react-responsive-picture';
-
+import Cursos from '../Body/Cursos/Cursos'
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper/Paper'
@@ -100,10 +100,9 @@ const theme = createMuiTheme({
           Item Two
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Item Three
+        <Cursos/>
         </TabPanel>
         <TabPanel value={value} index={4}>
           Item Three
