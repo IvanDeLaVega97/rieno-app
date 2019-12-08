@@ -1,11 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, Toolbar, Typography, Button, } from '@material-ui/core';
+//import Registro from '../../components/Logins/Registro';
+import {Link} from 'react-router-dom'; 
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,8 +26,12 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             RIENO
           </Typography>
-          <Button color="inherit">Login</Button>
-          <Button color="inherit">Register</Button>
+          <Link>
+          <Button color="inherit" style={{color: 'black', backgroundColor:'#CCCCCC', marginRight:5, }}>Login</Button>
+          </Link>
+          <Link to="/Registro">
+          <Button color="inherit" style={{color: 'black', backgroundColor:'#CCCCCC' }}>Registro</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>

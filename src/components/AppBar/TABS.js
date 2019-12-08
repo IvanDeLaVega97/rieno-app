@@ -1,112 +1,106 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import { Picture,  FullsizePicture} from 'react-responsive-picture';
-import Cursos from '../Body/Cursos/Cursos'
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+//import { Picture, FullsizePicture } from 'react-responsive-picture';
+import CardCursos from '../Body/Cards/Cursos';
+import CardArticulos from '../Body/Cards/CardArticulos';
+import Registro from '../Logins/Registro';
+import BodyInicio from '../Body/BodyInicio';
+import {Box,Tab, Tabs, Typography, makeStyles} from '@material-ui/core';
+
 import Paper from '@material-ui/core/Paper/Paper'
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+
 
 const theme = createMuiTheme({
-    palette: {
-      primary:{
-        main: '#263238',
-      },
-      secondary:{
-        main: '#263238',
-      },
-      type: 'dark'
+  palette: {
+    primary: {
+      main: '#263238',
     },
-  });
-  
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <Typography
-        component="div"
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        <Box p={3}>{children}</Box>
-      </Typography>
-    );
-  }
-  
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-  };
-  
-  function a11yProps(index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
-    };
-  }
-  
-  const useStyles = makeStyles(theme => ({
-    root: {
-      flexGrow: 1,
-      backgroundColor: '#000000',
+    secondary: {
+      main: '#263238',
     },
-  }));
+    type: 'dark'
+  },
+});
 
-  const EstiloTextoTabs = makeStyles(theme => ({
-    root: {
-      flexGrow: 1,
-      color: '#C30368',
-      indicator: {
-        backgroundColor: 'orange'
-      }
-  }}));
-  
-  export default function SimpleTabs() {
-    const classes = useStyles();
-    const classes2 = EstiloTextoTabs();
-    const [value, setValue] = React.useState(0);
-  
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-  
-    return (
-      <div>
-          <MuiThemeProvider theme={theme}>
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Typography
+      component="div"
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      <Box p={3}>{children}</Box>
+    </Typography>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: '#000000',
+    width: "auto"
+  },
+}));
+
+export default function SimpleTabs() {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div>
+      <MuiThemeProvider theme={theme}>
         <Paper className={classes.root}>
           <Tabs indicatorColor={'#C30368'} value={value} onChange={handleChange} aria-label="simple tabs example" centered className={classes.root} >
-            <Tab label="Inicio" {...a11yProps(0)} />
-            <Tab label="Blog" {...a11yProps(1)} />
-            <Tab label="Quienes Somos" {...a11yProps(2)} textColor="secundary"/>
-            <Tab label="Cursos" {...a11yProps(3)} />
-            <Tab label="Contacto" {...a11yProps(4)} />
+            <Tab style={{width:"20%", fontSize:"70%"}}  label="Inicio" {...a11yProps(0)} NamePage="Inicio" />
+            <Tab style={{width:"20%", fontSize:"70%"}} label="Articulos" {...a11yProps(1)} NamePage="Articulos" />
+            <Tab style={{width:"20%", fontSize:"70%"}} label="Quienes Somos" {...a11yProps(2)} NamePage="Quienes Somos" />
+            <Tab style={{width:"20%", fontSize:"70%"}} label="Cursos" {...a11yProps(3)} NamePage="Cursos" />
+            <Tab style={{width:"20%", fontSize:"70%"}} label="Contacto" {...a11yProps(4)} NamePage="Contacto" />
           </Tabs>
         </Paper>
-        </MuiThemeProvider>
-        <TabPanel value={value} index={0}>
-          <div style={{ height: 400}}>
-          <FullsizePicture center={true} src="https://firebasestorage.googleapis.com/v0/b/rieno-c0fd1.appspot.com/o/Img%20Principal.png?alt=media&token=158038ef-e461-4da3-8218-c64c5671d79e">
-          </FullsizePicture>
-          </div>
+      </MuiThemeProvider>
+      <TabPanel value={value} index={0}>
+        <div style={{ height: 1000, width: "90%", marginLeft: "3.5%"}}>
+          <BodyInicio/>
+        </div>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+      <CardArticulos />
         </TabPanel>
-        <TabPanel value={value} index={1}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-        <Cursos/>
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          Item Three
-        </TabPanel>
-      </div>
-    );
-  }
+      <TabPanel value={value} index={2}>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <CardCursos />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <Registro></Registro>
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        <Registro></Registro>
+      </TabPanel>
+    </div>
+  );
+}
