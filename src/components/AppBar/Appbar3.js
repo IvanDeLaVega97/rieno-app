@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, } from '@material-ui/core';
 //import Registro from '../../components/Logins/Registro';
-import {Link} from 'react-router-dom'; 
+import {Link, Redirect} from 'react-router-dom'; 
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,11 +26,8 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             RIENO
           </Typography>
-          <Link>
-          <Button color="inherit" style={{color: 'black', backgroundColor:'#CCCCCC', marginRight:5, }}>Login</Button>
-          </Link>
-          <Link to="/Registro">
-          <Button color="inherit" style={{color: 'black', backgroundColor:'#CCCCCC' }}>Registro</Button>
+          <Link to="/Usuario">
+          <Button color="inherit" style={{color: 'black', backgroundColor:'#CCCCCC' }}>Inicio & Registro</Button>
           </Link>
         </Toolbar>
       </AppBar>
