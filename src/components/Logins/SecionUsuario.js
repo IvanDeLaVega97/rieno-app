@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core';
+import { Card, CardActionArea, CardActions, CardContent, CardMedia, Typography, Grid } from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
 import MediaCard from './Registro';
 import AppBarUser from '../../Plataforma/Usuario/AppBarUser'
 import Helpers from '../../Plataforma/Usuario/helpers';
-let Cursos = ''
+import Cursos from '../Cursos';
+import { textAlign } from '@material-ui/system';
+import { DB_CONFIG } from '../config/config';
+import 'firebase/database';
+
+let Cursos2 = ''
 class App extends Component {
     constructor() {
         super();
         this.state = {
-            user: null
+            user: null,
+            Curso: [
+
+            ]
         };
 
+        this.app = firebase.initializeApp(DB_CONFIG);
+        this.db = this.app.database().ref().child('Cursos');
         this.handleAuth = this.handleAuth.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
     }
@@ -30,34 +40,22 @@ class App extends Component {
     });
 
     async componentWillMount() {
+        const { Curso } = this.state;
+        this.db.on('child_added', snap => {
+            Curso.push({
+                CursoID: snap.key,
+                CursoContenido: snap.val().CursoContenido
+            })
+            this.setState({ Curso })
+        });
         firebase.auth().onAuthStateChanged(user => {
             this.setState({ user });
         });
 
-        try{
-
-            let userNamePath = "/Cursos"
-            return firebase.database().ref(userNamePath).once('value', (snapshot) => {
-            console.log(snapshot.toJSON());
-            if (snapshot.val()) {
-                Cursos = snapshot.val()                
-            }
-        })
-            /*let user = await firebase.auth().currentUser
-            Helpers.getCurso( (name) => {
-                this.setState({
-                    userName: name
-                })
-            })*/
-        }
-        catch(error){
-            console.log(error);
-        }
     }
 
     handleAuth() {
         const provider = new firebase.auth.GoogleAuthProvider();
-
         firebase.auth().signInWithPopup(provider)
             .then(result => { console.log(`${result.user.displayName} `) })
             .catch(error => console.log(`Error ${error.code}: ${error.massage}`));
@@ -69,50 +67,59 @@ class App extends Component {
             .catch(error => console.log(`Error ${error.code}: ${error.massage}`));
     }
 
-    
-
     renderLoginButton() {
         if (this.state.user) {
             const UsuarioL = `Usuario/${this.state.user.uid}`;
-            
-            //<button onClick={this.handleLogout}></button>
             return (
                 <div>
-                    <Redirect to={UsuarioL}/>
-                    <AppBarUser Nombre={this.state.user.displayName} imagen={this.state.user.photoURL}/>
+                    <Redirect to={UsuarioL} />
+                    <AppBarUser Nombre={this.state.user.displayName} imagen={this.state.user.photoURL} />
+                    <span style={{ textAlign: "center", fontSize: 40 }}>Cursos</span>
+                    <div>
+                        {
+                            this.state.Curso.map(CartaCurso => {
+                                return (
+                                    <Grid style={{ marginLeft: 20, marginRight:20, marginTop: 0 }}>
+                                        <br />
+                                        <Cursos key={CartaCurso.CursoID} CursoID={CartaCurso.CursoID} CursoContenido={CartaCurso.CursoContenido} />
+                                    </Grid>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
             );
         }
         else {
-            return(
+            return (
                 <div align="center">
-                <MediaCard>
-                    <Card className={this.useStyles.card}>
-                        <br />
-                        <Typography gutterBottom variant="h5" component="h2" align="center">
-                            Registro
-                        </Typography>
-                        <CardMedia
-                            className={this.useStyles.media}
-                            image="https://firebasestorage.googleapis.com/v0/b/rieno-c0fd1.appspot.com/o/undraw_authentication_fsn5.svg?alt=media&token=f340490f-b905-47bd-84a7-8827365199f2"
-                            title="Registro de Usuario"
-                            size="center"
-                        />
-                        <CardContent>
+                    <MediaCard>
+                        <Card className={this.useStyles.card}>
                             <br />
-                            <Typography variant="body2" component="p">
-                                Registro con Autentificación de Google
+                            <Typography gutterBottom variant="h5" component="h2" align="center">
+                                Registro
+                        </Typography>
+                            <CardMedia
+                                className={this.useStyles.media}
+                                image="https://firebasestorage.googleapis.com/v0/b/rieno-c0fd1.appspot.com/o/undraw_authentication_fsn5.svg?alt=media&token=f340490f-b905-47bd-84a7-8827365199f2"
+                                title="Registro de Usuario"
+                                size="center"
+                            />
+                            <CardContent>
+                                <br />
+                                <Typography variant="body2" component="p">
+                                    Registro con Autentificación de Google
                             </Typography>
-                        </CardContent>
-                        <CardActionArea>
-                        <CardActions>
-                        <button onClick={this.handleAuth}>Login</button>
-                        </CardActions>
-                    </CardActionArea>
-                    </Card>
-                </MediaCard>
-            </div>
-                
+                            </CardContent>
+                            <CardActionArea>
+                                <CardActions>
+                                    <button onClick={this.handleAuth}>Login</button>
+                                </CardActions>
+                            </CardActionArea>
+                        </Card>
+                    </MediaCard>
+                </div>
+
             );
         }
     }
@@ -120,7 +127,7 @@ class App extends Component {
     render() {
         return (
             <div align="center">
-            {this.renderLoginButton()}
+                {this.renderLoginButton()}
             </div>
         )
     }
