@@ -7,15 +7,21 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Pie from './components/Body/Pie';
 import Usuario from './Plataforma/Usuario/PrincipalUsuario';
 import Registro from './components/Logins/SecionUsuario';
+import firebase from 'firebase';
+import { DB_CONFIG } from './components/config/config';
+import PantallaCurso from './PantallaCurso/PantallaCurso';
+import PantallaCursoAdmin from './PantallaCursoAdmin/PantallaCursoAdmin';
 
 
 function App() {
+  firebase.initializeApp(DB_CONFIG);
   return (
     <Router>
         <Switch>
           <Route path="/" exact component={Principal} />
           <Route path="/Usuario" component={Registro} />
-          <Route path="/Registro" component={Usuario} />
+          <Route path="/Curso/Admin" component={PantallaCursoAdmin} />
+          <Route path="/Curso" component={PantallaCurso} />
         </Switch>
     </Router>
   );

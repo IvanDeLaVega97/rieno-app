@@ -7,9 +7,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import RegistroCE from '../Plataforma/Usuario/RegistroaCursos/RegistroCE';
 
-
-
-
 class Cursos extends Component {
     constructor(props) {
         super(props);
@@ -41,10 +38,10 @@ class Cursos extends Component {
                             Curso
                     </Typography>
                         <Typography variant="h5" component="h2">
-                            {this.CursoContenido}
+                            {this.CursoID}
                         </Typography>
                         <Typography className={classes.pos} color="textSecondary">
-                            adjective
+                            {this.CursoContenido}
                      </Typography>
                         <Typography variant="body2" component="p">
                             well meaning and kindly.
@@ -53,7 +50,7 @@ class Cursos extends Component {
                         </Typography>
                     </CardContent> 
                     <CardActions>
-                        <Button onClick={<RegistroCE/>} style={{marginLeft:"5%"}} size="small">Registrarse</Button>
+                        <Button onClick={console} style={{marginLeft:"5%"}} size="small">Registrarse</Button>
                         <Button style={{marginLeft:"75%"}} size="small">Mostrar Mas </Button>
                     </CardActions>
                 </Card> 

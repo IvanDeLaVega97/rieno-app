@@ -6,7 +6,7 @@ import {CardActionArea, CardContent, Typography, Divider} from '@material-ui/cor
 
 const useStyles = makeStyles({
   card: {
-    maxWidth: 250,
+    maxWidth: "100%",
     margin: "lem",
     boxSizing: "border-box"
   },
