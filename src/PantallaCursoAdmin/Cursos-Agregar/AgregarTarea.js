@@ -5,7 +5,13 @@ import firebase from 'firebase';
 
 
 export default function FormDialog({ Titulo1, Des1 }) {
+    
     const [open, setOpen] = React.useState(false);
+
+    const [values, setValues] = React.useState({
+        textmask: values,
+        numberformat: setValues, 
+      });
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -29,6 +35,21 @@ export default function FormDialog({ Titulo1, Des1 }) {
         },
     }));
 
+    const Valores = ({Titlulo1}) =>{
+        var Titulo = Titlulo1;
+        debugger;
+    }
+    
+    const handleChange = name => event => {
+        var dato ;
+        debugger;
+       /* setValues({
+            [name]: event.target.value,
+            Valores({event})
+            
+        });*/
+      };
+
     return (
         <div>
             <Fab variant="outlined" color="primary" onClick={handleClickOpen}>
@@ -42,26 +63,27 @@ export default function FormDialog({ Titulo1, Des1 }) {
                         Titulo
                     </DialogContentText>
                     <TextField
+                        value={values.numberformat}
+                        onChange={handleChange('text')}
                         autoFocus
                         margin="dense"
                         id="name"
-                        label="Agrege Titulo"
                         style={{ marginBottom: 25 }}
                     />
                     <DialogContentText style={{ marginBottom: -15 }}>
                         Descripción
                     </DialogContentText>
                     <TextField
+                        name="popo"
                         margin="dense"
                         id="name2"
-                        label="Agrege Descripción"
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={() => AddTarea({ Titulo: 1, Des: 1 })} color="primary">
+                    <Button onClick={handleChange} color="primary">
                         Publicar
                      </Button>
                 </DialogActions>

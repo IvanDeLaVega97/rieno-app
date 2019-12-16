@@ -11,6 +11,7 @@ import firebase from 'firebase';
 import { DB_CONFIG } from './components/config/config';
 import PantallaCurso from './PantallaCurso/PantallaCurso';
 import PantallaCursoAdmin from './PantallaCursoAdmin/PantallaCursoAdmin';
+import LandingPage from './PantallaPrincipal/LandingPage'
 
 
 function App() {
@@ -30,7 +31,9 @@ export default App;
 
 const Principal = () =>
   <Fragment>
-    <Appbar3/>
-    <TABS/>
-    <Pie/>
+    <LandingPage/>
   </Fragment>
+
+  /*<Appbar3/>
+    <TABS/>
+    <Pie/> */

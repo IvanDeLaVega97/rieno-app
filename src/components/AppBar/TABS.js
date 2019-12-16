@@ -90,6 +90,16 @@ export default function SimpleTabs() {
         <CardArticulos />
       </TabPanel>
       <TabPanel value={value} index={2}>
+
+  <Typography variant="h5" component="h3">
+    This is a sheet of paper.
+  </Typography>
+  <Typography component="p">
+    Paper can be used to build surface or other elements for your application.
+  </Typography>
+
+
+
       </TabPanel>
       <TabPanel value={value} index={3}>
         <p style={{backgroundColor: "black", height:50, textAlign: "center"}}>
