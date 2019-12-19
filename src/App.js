@@ -6,13 +6,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 //import Registro from './components/Logins/Registro';
 import Pie from './components/Body/Pie';
 import Usuario from './Plataforma/Usuario/PrincipalUsuario';
-import Registro from './components/Logins/SecionUsuario';
+import Registro from './Registro/Registro';
 import firebase from 'firebase';
 import { DB_CONFIG } from './components/config/config';
-import PantallaCurso from './PantallaCurso/PantallaCurso';
-import PantallaCursoAdmin from './PantallaCursoAdmin/PantallaCursoAdmin';
-import LandingPage from './PantallaPrincipal/LandingPage'
-
+import InicioSesion from './InicioSesion/InicioSesion';
+import LandingPage from './PantallaPrincipal/LandingPage';
+import Profile from './PerfilUsuario/PerfilUsuario';
+import PerfilAdmin from './PerfilAdmin/PerfilAdmin';
+import Archivo from './Archivos/Archivos';
 
 function App() {
   firebase.initializeApp(DB_CONFIG);
@@ -20,9 +21,10 @@ function App() {
     <Router>
         <Switch>
           <Route path="/" exact component={Principal} />
-          <Route path="/Usuario" component={Registro} />
-          <Route path="/Curso/Admin" component={PantallaCursoAdmin} />
-          <Route path="/Curso" component={PantallaCurso} />
+          <Route path="/Registro" component={Registro} />
+          <Route path="/Admin/Ujsde5fsEt845R1Yu2" exact component={PerfilAdmin} />
+          <Route path="/InicioSesion" component={InicioSesion} />
+          <Route path="/Usuario" component={Profile} />
         </Switch>
     </Router>
   );
@@ -33,6 +35,11 @@ const Principal = () =>
   <Fragment>
     <LandingPage/>
   </Fragment>
+  //
+  //<Login/>
+//<Registro/>
+  //<Profile/>
+  //<PerfilAdmin/>
 
   /*<Appbar3/>
     <TABS/>

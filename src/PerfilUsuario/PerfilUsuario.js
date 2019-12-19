@@ -9,9 +9,9 @@ import Box from '@material-ui/core/Box';
 import APPBAR from './APPBAR';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-//import AgregarTare from '../Cursos-Agregar/AgregarTarea';
-import TareaMostrar from '../Cursos-Agregar/TareasMostrar/TareasMostrar';
-import Integrantes from '../Integrantes/Integrantes';
+import TareaMostrar from './TareasMostrar/TareasMostrar';
+import Integrantes from './Integrantes/Integrantes';
+//import AgregarTarea from './TareasMostrar/AgregarTarea';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,11 +64,10 @@ export default function SimpleTabs() {
   return (
     <div className={classes.root}>
       <AppBar position="static">
-      <APPBAR Curso="LA COCA MATA"/>
+      <APPBAR Curso="Ergonomia Beneficios"/>
         <Tabs centered value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Tablón" {...a11yProps(0)} />
-          <Tab label="Archivos de Clase" {...a11yProps(1)} />
-          <Tab label="Personas" {...a11yProps(2)} />
+          
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

@@ -8,16 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import {
     Card,
     CardBody,
-    CardFooter,
-    CardTitle,
-    Form,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
-    Container,
-    Row,
-    Col
   } from "reactstrap";
 
 class Cursos extends Component {
@@ -54,9 +44,7 @@ class Cursos extends Component {
                         <Typography variant="h5" component="h2">
                             {this.CursoID}
                         </Typography>
-                        <Typography className={classes.pos} color="textSecondary">
-                            {this.CursoContenido}
-                     </Typography>
+                        
 
                     </CardContent> 
                     </CardBody>

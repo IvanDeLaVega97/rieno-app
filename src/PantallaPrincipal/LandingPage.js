@@ -25,8 +25,9 @@ import "../assets/css/bootstrap.min.css";
 import "../assets/scss/paper-kit.scss";
 import "../assets/demo/demo.css";
 import CursosB from './CursosB';
+import firebase from 'firebase';
 
-function LandingPage() {
+export default function LandingPage({des,ded}) {
   document.documentElement.classList.remove("nav-open");
   React.useEffect(() => {
     document.body.classList.add("profile-page");
@@ -34,6 +35,22 @@ function LandingPage() {
       document.body.classList.remove("profile-page");
     };
   });
+
+  const [open, setOpen] = React.useState(false);
+
+const AddMensaje = () => {
+  let Nombre = document.getElementById("name").value;
+  let Email = document.getElementById("Email").value;
+  let Mensaje = document.getElementById("Mensaje").value;
+  const db = firebase.database().ref('Mensaje/');
+  db.push().child("Nombre").set(Nombre);
+  db.push().child("Correo").set(Email);
+  db.push().child("Mensaje").set(Mensaje);
+  document.getElementById("name").value = "";
+  document.getElementById("Email").value = "";
+  document.getElementById("Mensaje").value = "";
+  //db.child("Nombre").push(Nombre);
+}
 
   return (
     <>
@@ -208,14 +225,14 @@ function LandingPage() {
                 <Form className="contact-form">
                   <Row>
                     <Col md="6">
-                      <label style={{color:"white"}}>Name</label>
+                      <label style={{color:"white"}}>Nombre</label>
                       <InputGroup>
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="nc-icon nc-single-02" />
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Name" type="text" />
+                        <Input placeholder="Nombre" type="text" name="name" id="name" />
                       </InputGroup>
                     </Col>
                     <Col md="6">
@@ -226,23 +243,24 @@ function LandingPage() {
                             <i className="nc-icon nc-email-85" />
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Email" type="text" />
+                        <Input placeholder="Email" type="text" name="Email" id="Email"/>
                       </InputGroup>
                     </Col>
                   </Row>
-                  <label style={{color:"white"}}>Message</label>
-                  <Input
-                    placeholder="Tell us your thoughts and feelings..."
-                    type="textarea"
-                    rows="4"
+                  <label style={{color:"white"}}>Mensaje</label>
+                  <Input name="Mensaje" id="Mensaje" placeholder="exprésese" type="textarea" rows="4"
                   />
                   <Row>
                     <Col className="ml-auto mr-auto" md="4">
-                      <Button className="btn-fill" color="danger" size="lg">
-                        Send Message
+                      <Button className="btn-fill" color="danger" size="lg" onClick={() => AddMensaje()}>
+                        Enviar Mensaje
                       </Button>
+
                     </Col>
                   </Row>
+                  <Col >
+                  <label style={{color:"white"}}>Email: rieno2016@Gmail.com Tel:(668) 142 0529 y (664) 368 77835 </label>
+                  </Col>
                 </Form>
               </Col>
             </Row>
@@ -253,5 +271,3 @@ function LandingPage() {
     </>
   );
 }
-
-export default LandingPage;

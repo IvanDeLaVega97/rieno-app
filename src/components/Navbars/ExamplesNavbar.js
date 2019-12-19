@@ -1,23 +1,6 @@
-/*!
 
-=========================================================
-* Paper Kit React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/paper-kit-react
-
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/paper-kit-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-import { Link2 } from "react-router-dom";
+import Link2 from "react-router-dom/Link";
 // nodejs library that concatenates strings
 import classnames from "classnames";
 
@@ -58,11 +41,13 @@ function ExamplesNavbar() {
       }
     };
 
+
     window.addEventListener("scroll", updateNavbarColor);
 
     return function cleanup() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
+
   });
   return (
     <Navbar
@@ -99,6 +84,13 @@ function ExamplesNavbar() {
           isOpen={navbarCollapse}
         >
           <Nav navbar>
+          <NavItem>
+              <NavLink>
+                <Link style={{cursor: "pointer"}} to="1" smooth={true} duration={1000}>
+                <i className="nc-icon nc-book-bookmark" /> Quienes Somos
+                </Link>
+              </NavLink>
+            </NavItem>
             <NavItem>
               <NavLink to="/index" tag={Link}>
               <Link style={{cursor: "pointer"}} to="2" smooth={true} duration={1000}>
@@ -115,21 +107,14 @@ function ExamplesNavbar() {
             </NavItem>
             <NavItem>
               <NavLink>
-                <Link style={{cursor: "pointer"}} to="1" smooth={true} duration={1000}>
-                <i className="nc-icon nc-book-bookmark" /> Quienes Somos
-                </Link>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink>
                 <Link style={{cursor: "pointer"}} to="4" smooth={true} duration={1000}>
                 <i className="nc-icon nc-book-bookmark" /> Contacto
                 </Link>
               </NavLink>
             </NavItem>
+            <Link2 to="InicioSesion">
             <Button
               style={{color:"grey"}}
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
               className="btn-round mr-1"
               color="neutral"
               target="_blank"
@@ -138,9 +123,10 @@ function ExamplesNavbar() {
               <i className="fa fa-play" />
               Iniciar Sesión
             </Button>
+            </Link2>
+            <Link2 to="Registro">
             <Button
               style={{color:"grey"}}
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
               className="btn-round mr-1"
               color="neutral"
               target="_blank"
@@ -149,6 +135,7 @@ function ExamplesNavbar() {
               <i className="fa fa-play" />
               Registrarse
             </Button>
+            </Link2>
           </Nav>
         </Collapse>
       </Container>
